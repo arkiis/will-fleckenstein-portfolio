@@ -5,7 +5,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { DISPLAY_FONT } from "../constants/typography";
+import { DISPLAY_FONT, HERO_HEADING_SIZE } from "../constants/typography";
 
 type Theme = "dark" | "light";
 
@@ -39,6 +39,7 @@ function applyCssVariables(colors: ThemeContextType["colors"]) {
   root.style.setProperty("--portfolio-accent", colors.accent);
   root.style.setProperty("--portfolio-border", colors.border);
   root.style.setProperty("--portfolio-display-font", DISPLAY_FONT);
+  root.style.setProperty("--portfolio-hero-heading-size", HERO_HEADING_SIZE);
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

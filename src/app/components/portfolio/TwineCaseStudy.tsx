@@ -13,28 +13,17 @@ import {
   Smile,
   Trophy,
   CheckCheck,
-  Users,
-  PenLine,
-  MonitorSmartphone,
-  Palette,
   ExternalLink,
-  Heart,
-  Search as SearchIcon,
-  MessageCircle,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { ImageLoader } from "./ImageLoader";
 import { findProject, projects } from "./projects";
 import gatorLogo from "../../../imports/gator_UI_logo.png";
 import classPhoto from "../../../imports/special_thanks.jpg";
-import twinePhoneMockup from "../../../imports/twine-phone-mockup.png";
+import twineHeroDemoVideo from "../../../imports/twine-hero-demo.mp4";
 import twineLogo from "../../../imports/twine-logo.png";
-import consumerGator from "../../../imports/consumer-gator.png";
-import businessGator from "../../../imports/business-gator.png";
-import browsingImg from "../../../imports/Browsing.png";
-import analyticsImg from "../../../imports/Analytics.png";
-import SearchScreen from "../../../imports/Search/Search";
-import MessagingScreen from "../../../imports/Messaging6/Messaging6";
+import { InitialStruggleSection } from "./twine/InitialStruggleSection";
+import { WhatIDidSection } from "./twine/WhatIDidSection";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Nav } from "./Nav";
 
@@ -54,8 +43,8 @@ export function TwineCaseStudy({
     <article className="relative">
       <Nav />
       <Hero project={project} colors={colors} />
-      <InitialStruggle />
-      <WhatIDid />
+      <InitialStruggleSection />
+      <WhatIDidSection />
       <Research />
       <PainPoints />
       <Findings />
@@ -165,24 +154,21 @@ function Hero({
       <div
         className="relative flex min-h-[360px] items-center justify-center overflow-hidden px-6 py-16 lg:min-h-0 lg:px-10"
         style={{
-          background:
-            "linear-gradient(145deg, #2a3140 0%, #1a2030 55%, #141a24 100%)",
+          background: "#000000",
         }}
       >
-        <motion.img
-          src={twinePhoneMockup}
-          alt="Twine iPhone mockup"
+        <motion.video
+          src={twineHeroDemoVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-label="Twine demo video"
           initial={{ opacity: 0, y: 32, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative z-10 h-auto max-h-[min(78vh,720px)] w-full max-w-[min(92%,420px)] object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.45)]"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(ellipse at 60% 40%, rgba(255,255,255,0.08), transparent 62%)",
-          }}
+          className="relative z-10 h-full w-full object-cover"
         />
       </div>
     </section>
@@ -192,190 +178,6 @@ function Hero({
 /* ────────────────────────────────────────────────────────── */
 /*  INITIAL STRUGGLE                                         */
 /* ────────────────────────────────────────────────────────── */
-
-function AudienceHighlight({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-sm bg-[var(--portfolio-accent)]/15 px-1.5 py-0.5 font-medium text-[var(--portfolio-accent)]">
-      {children}
-    </span>
-  );
-}
-
-function GatorCharacter({
-  image,
-  label,
-  alt,
-}: {
-  image: string;
-  label: string;
-  alt: string;
-}) {
-  return (
-    <button
-      type="button"
-      className="group relative flex flex-col items-center border-0 bg-transparent p-2 outline-none"
-      data-cursor="hover"
-      aria-label={label}
-    >
-      <span
-        className="pointer-events-none absolute -top-12 z-10 whitespace-nowrap rounded-full border border-[var(--portfolio-border)]/60 bg-[var(--portfolio-card)]/95 px-4 py-2 text-[13px] text-[var(--portfolio-text)] opacity-0 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:opacity-100 group-focus-visible:-translate-y-1 group-focus-visible:opacity-100 md:-top-14 md:text-[14px]"
-        style={{ fontFamily: "var(--portfolio-display-font)" }}
-        role="tooltip"
-      >
-        {label}
-      </span>
-      <img
-        src={image}
-        alt={alt}
-        className="h-auto max-h-[min(200px,38vw)] w-auto max-w-[min(200px,42vw)] object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-out group-hover:scale-[1.06] group-hover:-translate-y-1 group-focus-visible:scale-[1.06] md:max-h-[min(300px,32vh)] md:max-w-[min(280px,28vw)]"
-      />
-    </button>
-  );
-}
-
-function InitialStruggle() {
-  return (
-    <section
-      id="initial-struggle"
-      className="relative scroll-mt-24 py-32 md:py-44"
-    >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="01" label="Initial Struggle" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.2 }}
-          className="max-w-[760px] space-y-6"
-        >
-          <p className="text-[15px] leading-[1.8] text-[var(--portfolio-text-muted)] md:text-[16px]">
-            Compared to the other ideas in the class, ours was more complex because we had two
-            distinct user groups with different problems:{" "}
-            <AudienceHighlight>student consumers</AudienceHighlight> and{" "}
-            <AudienceHighlight>student producers</AudienceHighlight>.
-          </p>
-          <p className="text-[15px] leading-[1.8] text-[var(--portfolio-text-muted)] md:text-[16px]">
-            In response, we conducted two separate sets of user interviews, tailoring each
-            questionnaire to its respective group.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 1, delay: 0.15 }}
-          className="relative mt-14 overflow-hidden rounded-sm md:mt-20"
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(95,140,200,0.12) 0%, rgba(30,45,70,0.08) 45%, rgba(45,72,52,0.18) 100%)",
-            }}
-          />
-          <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-[#3d5c42]/22 via-[#3d5c42]/08 to-transparent" />
-          <div className="pointer-events-none absolute left-1/2 top-[18%] h-32 w-[70%] -translate-x-1/2 rounded-full bg-white/[0.04] blur-3xl" />
-
-          <div className="relative flex min-h-[280px] items-end justify-between gap-4 px-2 pb-6 pt-16 sm:min-h-[320px] sm:px-8 sm:pb-10 md:min-h-[380px] md:gap-12 md:px-16 md:pb-14 md:pt-20">
-            <GatorCharacter
-              image={consumerGator}
-              label="Student consumer"
-              alt="Gator mascot with shopping bags"
-            />
-            <GatorCharacter
-              image={businessGator}
-              label="Student producer"
-              alt="Gator business person"
-            />
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ────────────────────────────────────────────────────────── */
-/*  WHAT I DID                                               */
-/* ────────────────────────────────────────────────────────── */
-
-function WhatIDid() {
-  const items = [
-    {
-      icon: Users,
-      title: "User interviews",
-      body: "Led semi-structured interviews with seven UF students across both sides of the marketplace.",
-    },
-    {
-      icon: PenLine,
-      title: "Affinity mapping & synthesis",
-      body: "Clustered raw quotes into themes, then translated themes into design opportunities.",
-    },
-    {
-      icon: MonitorSmartphone,
-      title: "Low & hi-fidelity screens",
-      body: "Designed analytics and DM flows from rough wires through polished mobile interfaces.",
-    },
-    {
-      icon: Palette,
-      title: "Logo & brand iteration",
-      body: "Explored multiple logo directions before landing on a knot mark with an embedded gator.",
-    },
-  ];
-  return (
-    <section
-      id="what-i-did"
-      className="relative scroll-mt-24 py-20 md:py-28"
-    >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="02" label="What I Did" />
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="mb-14 max-w-[900px] leading-[1.1] tracking-[-0.01em] text-[var(--portfolio-text)]"
-          style={{
-            fontFamily: "var(--portfolio-display-font)",
-            fontSize: "clamp(28px, 3.6vw, 48px)",
-            fontWeight: 300,
-          }}
-        >
-          My role across the{" "}
-          <span className="italic">research</span>, <span className="italic">design</span>, and{" "}
-          <span className="italic">brand</span> work.
-        </motion.h2>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {items.map((c, i) => (
-            <motion.div
-              key={c.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.9, delay: i * 0.08 }}
-              className="group relative rounded-sm border border-[var(--portfolio-border)] bg-[var(--portfolio-card)]/60 p-6 transition-colors duration-300 hover:border-[var(--portfolio-text)]/55"
-            >
-              <c.icon
-                size={22}
-                strokeWidth={1.25}
-                className="text-[var(--portfolio-text-muted)] transition-colors duration-300 group-hover:text-[var(--portfolio-text)]"
-              />
-              <div className="mt-6 text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/55">
-                0{i + 1}
-              </div>
-              <div className="mt-2 text-[15px] text-[var(--portfolio-text)]">{c.title}</div>
-              <div className="mt-3 text-[13px] leading-[1.6] text-[#cfc6b6]/65">
-                {c.body}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ────────────────────────────────────────────────────────── */
 /*  RESEARCH — clean horizontal split                        */
@@ -1315,194 +1117,8 @@ function Screens({ project: _project }: { project: ReturnType<typeof findProject
             </div>
           </motion.div>
         </div>
-
-        {/* Annotated screen mockups */}
-        <div className="mt-28 grid gap-12 md:grid-cols-2">
-          <ScreenMockup
-            icon={Heart}
-            label="Browsing"
-            title="Familiar visual rhythm, pulled from what students already know."
-            body={
-              <>
-                The browsing flow leans into{" "}
-                <span className="italic text-[var(--portfolio-accent)]">Instagram-style</span>{" "}
-                visual scrolling — a pattern students already trust — and uses
-                universal icons like the{" "}
-                <span className="italic text-[var(--portfolio-accent)]">heart</span> for
-                favoriting so the affordance is immediate.
-              </>
-            }
-          >
-            <img
-              src={browsingImg}
-              alt="Twine browsing screen"
-              className="h-full w-full object-cover object-top"
-            />
-          </ScreenMockup>
-
-          <ScreenMockup
-            icon={BarChart3}
-            label="Analytics"
-            title="Praise as motivation — the gator cheering progress on."
-            body={
-              <>
-                The analytics screen uses our anthropomorphic gator to apply
-                the{" "}
-                <span className="italic text-[var(--portfolio-accent)]">CASA principle</span>:
-                persuading through{" "}
-                <span className="italic text-[var(--portfolio-accent)]">praise</span>, motivating
-                entrepreneurs to keep earning rather than scolding them for
-                slow weeks.
-              </>
-            }
-          >
-            <img
-              src={analyticsImg}
-              alt="Twine analytics screen"
-              className="h-full w-full object-cover object-top"
-            />
-          </ScreenMockup>
-
-          <ScreenMockup
-            icon={SearchIcon}
-            label="Search"
-            title="Solving the discoverability problem outside the physical event."
-            body={
-              <>
-                The search flow tackles{" "}
-                <span className="italic text-[var(--portfolio-accent)]">discoverability</span>{" "}
-                head-on. Students who missed the Gator Market in person can
-                still find vendors through{" "}
-                <span className="italic text-[var(--portfolio-accent)]">categories</span> and
-                curated listings on Twine.
-              </>
-            }
-          >
-            <div className="absolute inset-0 origin-top-left bg-white" style={{ width: 402, height: 873, transform: "scale(0.572)" }}>
-              <SearchScreen />
-            </div>
-          </ScreenMockup>
-
-          <ScreenMockup
-            icon={MessageCircle}
-            label="Messaging"
-            title="One place to start — and finish — the conversation."
-            body={
-              <>
-                Messaging fixes the{" "}
-                <span className="italic text-[var(--portfolio-accent)]">fragmented
-                communication</span>{" "}
-                pain point so the entire service flow can be completed in one
-                place. The{" "}
-                <span className="italic text-[var(--portfolio-accent)]">mascot</span> reduces
-                friction by helping users initiate that first conversation.
-              </>
-            }
-          >
-            <div className="absolute inset-0 origin-top-left bg-white" style={{ width: 402, height: 873, transform: "scale(0.572)" }}>
-              <MessagingScreen />
-            </div>
-          </ScreenMockup>
-        </div>
       </div>
     </section>
-  );
-}
-
-/* iPhone mockup with edge lighting, used for the Final Prototype screens */
-function ScreenMockup({
-  icon: Icon,
-  label,
-  title,
-  body,
-  children,
-}: {
-  icon: any;
-  label: string;
-  title: string;
-  body: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 1 }}
-      className="grid grid-cols-1 items-center gap-8 rounded-sm border border-[var(--portfolio-border)]/10 bg-[var(--portfolio-card)] p-8 md:grid-cols-[230px_1fr] md:gap-10 md:p-10"
-    >
-      {/* iPhone frame */}
-      <div
-        className="relative mx-auto"
-        style={{
-          width: 230,
-          height: 500,
-          filter:
-            "drop-shadow(0 0 30px rgba(95,167,255,0.18)) drop-shadow(0 0 60px rgba(95,167,255,0.08)) drop-shadow(0 25px 50px rgba(0,0,0,0.55))",
-        }}
-      >
-        <svg
-          viewBox="0 0 230 500"
-          fill="none"
-          className="absolute inset-0 h-full w-full"
-        >
-          <rect
-            x="2"
-            y="2"
-            width="226"
-            height="496"
-            rx="40"
-            fill="var(--portfolio-bg)"
-          />
-          <rect
-            x="2"
-            y="2"
-            width="226"
-            height="496"
-            rx="40"
-            stroke="url(#phoneEdgeGradient)"
-            strokeWidth="2"
-          />
-          <defs>
-            <linearGradient
-              id="phoneEdgeGradient"
-              x1="115"
-              y1="0"
-              x2="115"
-              y2="500"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="rgba(95,167,255,0.55)" />
-              <stop offset="0.5" stopColor="rgba(95,167,255,0.2)" />
-              <stop offset="1" stopColor="rgba(95,167,255,0.45)" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute left-[10px] top-[10px] h-[480px] w-[210px] overflow-hidden rounded-[34px] bg-white">
-          {children}
-        </div>
-        <div className="absolute left-1/2 top-[6px] h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-[var(--portfolio-bg)]" />
-      </div>
-
-      {/* Caption */}
-      <div>
-        <div className="mb-4 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[var(--portfolio-accent)]">
-          <Icon size={14} strokeWidth={1.5} />
-          {label}
-        </div>
-        <h3
-          className="mb-4 leading-[1.15] tracking-[-0.01em] text-[var(--portfolio-text)]"
-          style={{
-            fontFamily: "var(--portfolio-display-font)",
-            fontSize: "clamp(22px, 2.4vw, 30px)",
-            fontWeight: 300,
-          }}
-        >
-          {title}
-        </h3>
-        <p className="text-[14px] leading-[1.7] text-[#cfc6b6]/75">{body}</p>
-      </div>
-    </motion.div>
   );
 }
 

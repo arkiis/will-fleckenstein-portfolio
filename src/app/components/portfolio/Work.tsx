@@ -58,19 +58,17 @@ function ProjectCard({
   displayFont: string;
 }) {
   const [hover, setHover] = useState(false);
-  const isComingSoon =
-    project.slug === "holiday-hub" || project.slug === "cheapreats";
 
   return (
     <button
       type="button"
-      onClick={() => !isComingSoon && onOpen(project.slug)}
+      onClick={() => onOpen(project.slug)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      data-cursor={isComingSoon ? "default" : "hover"}
+      data-cursor="hover"
       className="group flex w-full flex-col text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--focus-bg)]"
       style={{
-        cursor: isComingSoon ? "default" : "pointer",
+        cursor: "pointer",
         ["--focus-ring" as string]: `${colors.accent}66`,
         ["--focus-bg" as string]: colors.bg,
       }}
@@ -97,29 +95,12 @@ function ProjectCard({
           />
         </motion.div>
 
-        {isComingSoon && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
-            <span
-              className="rounded-sm border px-6 py-3 text-[13px] uppercase tracking-[0.22em]"
-              style={{
-                borderColor: `${colors.text}44`,
-                color: colors.text,
-                backgroundColor: `${colors.bg}e6`,
-              }}
-            >
-              Coming Soon
-            </span>
-          </div>
-        )}
-
-        {!isComingSoon && (
-          <span
-            className="absolute right-4 top-4 text-xl transition-opacity duration-300"
-            style={{ color: colors.text, opacity: hover ? 1 : 0 }}
-          >
-            ↗
-          </span>
-        )}
+        <span
+          className="absolute right-4 top-4 text-xl transition-opacity duration-300"
+          style={{ color: colors.text, opacity: hover ? 1 : 0 }}
+        >
+          ↗
+        </span>
       </motion.div>
 
       <div className="mt-5 flex flex-col gap-2 md:mt-6">

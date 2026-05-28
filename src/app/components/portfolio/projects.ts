@@ -1,11 +1,7 @@
 import twineImg from "../../../imports/twine-thumbnail.png";
 import harmonyImg from "../../../imports/harmonia-thumbnail.png";
-import holidayImg from "../../../imports/holiday-hub-thumbnail.png";
-import cheapreatsImg from "../../../imports/cheapreats-thumbnail.png";
 import twineMockup from "../../../imports/twine-phone-mockup.png";
 import harmonyMockup from "../../../imports/harmonia-phone-mockup.png";
-import holidayMockup from "../../../imports/holiday-hub-mockup.png";
-import cheapreatsMockup from "../../../imports/cheapreats-phone-mockup.png";
 
 export type CaseStudy = {
   slug: string;
@@ -150,7 +146,7 @@ export const projects: CaseStudy[] = [
     slug: "harmony",
     n: "02",
     year: "2026",
-    title: "Harmony",
+    title: "Harmonia",
     tag: "Roommate app for shared accountability",
     role: "Product · Systems · Gamification",
     blurb:
@@ -195,107 +191,6 @@ export const projects: CaseStudy[] = [
       "Tested with 4 households over 2 weeks. Three said housework conversations got easier. One kept using the prototype after the study.",
     reflection:
       "I had to unlearn a lot of default product habits. The win was knowing when to stop adding features.",
-    next: "holiday-hub",
-  },
-  {
-    slug: "holiday-hub",
-    n: "03",
-    year: "2026",
-    title: "Holiday Hub",
-    tag: "Local holiday guide for Gainesville",
-    role: "Product · Visual Design · Local Discovery",
-    blurb:
-      "A seasonal app to find events and local plans in Gainesville without chasing posts, flyers, and random accounts.",
-    img: holidayImg,
-    mockup: holidayMockup,
-    device: "desktop",
-    tileColor: "#8f3d32",
-    hue: "from-[#2a1a0a] to-[var(--portfolio-bg)]",
-    meta: [
-      { label: "Type", value: "Self initiated" },
-      { label: "Duration", value: "6 weeks" },
-      { label: "Team", value: "Solo" },
-      { label: "Tools", value: "Figma · Mapbox · Local interviews" },
-    ],
-    premise:
-      "What does a city feel like when the small good stuff is easy to find?",
-    chapters: [
-      {
-        n: "I",
-        title: "The scattered city",
-        body: "Gainesville's seasonal life lives across dozens of Instagram accounts, Facebook groups, and flyers on coffee shop walls. Holiday Hub gathers that into one calm place.",
-      },
-      {
-        n: "II",
-        title: "A guide, not a feed",
-        body: "It curates by season, mood, distance, and who you would go with. The home screen is a moodboard, not an endless scroll.",
-        quote: "Discovery should feel like flipping through a friend's photos.",
-      },
-      {
-        n: "III",
-        title: "Designing for trust in place",
-        body: "Every venue gets a short description written by a person, not scraped from somewhere else. Photography, type, and color shift with the season.",
-      },
-    ],
-    gallery: [
-      { src: holidayImg, caption: "Winter 2026 home moodboard" },
-      { src: holidayImg, caption: "Venue card with local type" },
-    ],
-    outcome:
-      "Soft launched with 3 cafés and 1 venue partner. 600+ saves in the first month. Featured in the UF design weekly.",
-    reflection:
-      "Gainesville has its own rhythm. You cannot design it like a generic SaaS dashboard and expect it to land.",
-    next: "cheapreats",
-  },
-  {
-    slug: "cheapreats",
-    n: "04",
-    year: "2025",
-    title: "Cheapreats",
-    tag: "Food delivery on web and mobile",
-    role: "Frontend · Product UI · Systems",
-    blurb:
-      "Frontend work at a food delivery startup: React Native web migration, vendor dashboard components, and GraphQL views in production.",
-    img: cheapreatsImg,
-    mockup: cheapreatsMockup,
-    device: "phone",
-    tileColor: "#b82e34",
-    hue: "from-[#0e1a2a] to-[var(--portfolio-bg)]",
-    meta: [
-      { label: "Type", value: "Internship" },
-      { label: "Duration", value: "Summer 2025 · 14 weeks" },
-      { label: "Team", value: "4 engineers, 1 PM, 1 designer (me)" },
-      { label: "Tools", value: "React Native · GraphQL · Figma" },
-    ],
-    premise:
-      "How do you build a vendor experience that holds up for people running real kitchens?",
-    chapters: [
-      {
-        n: "I",
-        title: "Designing for the back of house",
-        body: "The customer app gets attention, but the vendor dashboard is where the business actually runs. I spent the summer rebuilding flows and components for the people in the kitchen, not just the pitch deck.",
-      },
-      {
-        n: "II",
-        title: "From mockups to components",
-        body: "I shipped a reusable library across the React Native web migration and the vendor dashboard, built with engineering, not thrown over the wall. Every state mattered: empty, loading, partial errors. That is where vendors live.",
-        quote:
-          "The best feedback I got was from a restaurant owner who said the new dashboard felt 'less like a website and more like a tool.'",
-      },
-      {
-        n: "III",
-        title: "Working in production",
-        body: "I wrote frontend code, shipped GraphQL views, and sat in standups. Designing next to engineers changed how I judge what is actually shippable.",
-      },
-    ],
-    gallery: [
-      { src: cheapreatsImg, caption: "Vendor dashboard, orders view" },
-      { src: cheapreatsImg, caption: "Component library, key states" },
-    ],
-    outcome:
-      "Shipped to 40+ live vendors before the internship ended. Vendor order handling time dropped about 22% in analytics.",
-    reflection:
-      "Deadlines, code review, and real users taught me more than any classroom critique. I still design better when I stay close to implementation.",
     next: "twine",
   },
 ];

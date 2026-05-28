@@ -185,10 +185,10 @@ export function About() {
               className="max-w-[640px] text-[15px] leading-[1.75] md:text-[16px]"
               style={{ color: colors.text }}
             >
-              HI, I&apos;m Will. The quote above sums up my passion for product design that is all
-              about iterating until you&apos;re solving the right problem for people. I&apos;m
-              grateful my professor(Prof.Xu) recommended this book! it&apos;s helped shape a lot of
-              how I think about UI/UX.
+              Hi, I&apos;m Will. The quote above sums up my passion for product design: iterating
+              until you&apos;re solving the right problem for people. I&apos;m grateful my
+              professor, Prof. Xu, recommended this book. It&apos;s helped shape a lot of how I
+              think about UI/UX.
             </p>
 
             <motion.div

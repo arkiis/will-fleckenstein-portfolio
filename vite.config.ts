@@ -17,6 +17,10 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
+  build: {
+    // Never inline images as base64 — always emit original files
+    assetsInlineLimit: 0,
+  },
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

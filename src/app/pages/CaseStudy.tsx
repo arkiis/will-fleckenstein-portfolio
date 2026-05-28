@@ -170,7 +170,7 @@ export default function CaseStudy() {
           This was presented to the Gator UI club with our final prototype done. This is when our project came to a close, but based on our user insights I believe we created a realistic solution for students to help deal with conflict in relation to tasks or hosted events.
         </p>
         <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 drop-shadow-xl bg-white">
-          <img src={teamPhoto} alt="Harmonia Team" className="w-full h-auto object-cover" />
+          <img src={teamPhoto} alt="Harmonia team" className="w-full h-auto object-cover" />
         </div>
       </section>
 

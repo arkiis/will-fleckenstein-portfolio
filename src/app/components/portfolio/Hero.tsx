@@ -40,40 +40,29 @@ export function Hero() {
         <h1
           style={{
             fontFamily: displayFont,
+            fontSize: "var(--portfolio-hero-heading-size)",
             fontWeight: 300,
             lineHeight: 0.96,
             letterSpacing: "-0.02em",
             color: colors.text,
           }}
         >
-          <motion.span
-            {...fade(0.4)}
-            className="mt-3 block"
-            style={{ fontSize: "clamp(56px, 9vw, 132px)" }}
-          >
+          <motion.span {...fade(0.4)} className="mt-3 block">
             Shaping digital
           </motion.span>
 
-          <motion.span
-            {...fade(0.55)}
-            className="block"
-            style={{ fontSize: "clamp(56px, 9vw, 132px)" }}
-          >
+          <motion.span {...fade(0.55)} className="block">
             experiences with{" "}
             <span className="italic" style={{ color: colors.accent }}>
               story,
             </span>
           </motion.span>
 
-          <motion.span
-            {...fade(0.7)}
-            className="mt-2 block"
-            style={{ fontSize: "clamp(40px, 6.6vw, 96px)" }}
-          >
+          <motion.span {...fade(0.7)} className="mt-2 block">
             <span className="italic" style={{ color: colors.accent }}>
               motion
             </span>
-            <span style={{ color: colors.text }}>, and </span>
+            <span>, and </span>
             <span className="italic" style={{ color: colors.accent }}>
               care.
             </span>

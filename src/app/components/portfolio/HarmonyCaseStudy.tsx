@@ -202,7 +202,7 @@ function Hero({ project }: { project: ReturnType<typeof findProject> & {} }) {
             fontWeight: 300,
           }}
         >
-          Harmony
+          Harmonia
         </motion.h1>
       </div>
     </section>

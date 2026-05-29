@@ -21,6 +21,12 @@ export default defineConfig({
     // Never inline images as base64 — always emit original files
     assetsInlineLimit: 0,
   },
+  server: {
+    // Large PNGs in public/ can trigger Windows EBUSY watcher crashes
+    watch: {
+      ignored: ['**/public/images/**'],
+    },
+  },
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

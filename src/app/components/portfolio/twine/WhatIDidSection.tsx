@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, type ElementType } from "react";
 import { BarChart3, LayoutGrid, MessageSquare } from "lucide-react";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
-import { TwineCaseStudyMediaFrame, MEDIA_FRAME_BACKGROUND_SOFT } from "./TwineCaseStudyMediaFrame";
+import { TwineCaseStudyMediaFrame } from "./TwineCaseStudyMediaFrame";
 
-const COMMUNICATION_SCREENS_SRC = "/images/twine-communication-screens.png";
-const ANALYTICS_SCREENS_SRC = "/images/twine-analytics-screens.png";
-const BROWSING_SCREENS_SRC = "/images/twine-browsing-screens.png";
+const COMMUNICATION_SCREENS_SRC = "/images/twine-communication-screens.png?v=20260601";
+const ANALYTICS_SCREENS_SRC = "/images/twine-analytics-screens.png?v=20260601";
+const BROWSING_SCREENS_SRC = "/images/twine-browsing-screens.png?v=20260601";
 
 type WhatIDidItem = {
   id: string;
@@ -58,11 +58,9 @@ function SectionLabel({ n, label }: { n: string; label: string }) {
 }
 
 function DesignEvidence({ item }: { item: WhatIDidItem }) {
-  const isBrowsing = item.id === "browsing";
-
   return (
     <figure className="min-w-0">
-      <TwineCaseStudyMediaFrame background={isBrowsing ? MEDIA_FRAME_BACKGROUND_SOFT : undefined}>
+      <TwineCaseStudyMediaFrame>
         <ImageWithFallback
           src={item.evidenceSrc}
           alt={item.evidenceAlt}

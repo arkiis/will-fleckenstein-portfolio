@@ -121,19 +121,18 @@ export function WhatIDidSection() {
                     : "border-[var(--portfolio-border)] bg-[var(--portfolio-card)]/60 hover:border-[var(--portfolio-text)]/55"
                 }`}
               >
-                <Icon
-                  size={22}
-                  strokeWidth={1.25}
-                  className={`transition-colors duration-300 ${
-                    isActive
-                      ? "text-[var(--portfolio-accent)]"
-                      : "text-[var(--portfolio-text-muted)] group-hover:text-[var(--portfolio-text)]"
-                  }`}
-                />
-                <div className="mt-6 text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/55">
-                  0{i + 1}
+                <div className="flex items-center gap-3">
+                  <Icon
+                    size={22}
+                    strokeWidth={1.25}
+                    className={`shrink-0 transition-colors duration-300 ${
+                      isActive
+                        ? "text-[var(--portfolio-accent)]"
+                        : "text-[var(--portfolio-text-muted)] group-hover:text-[var(--portfolio-text)]"
+                    }`}
+                  />
+                  <div className="text-[15px] text-[var(--portfolio-text)]">{item.title}</div>
                 </div>
-                <div className="mt-2 text-[15px] text-[var(--portfolio-text)]">{item.title}</div>
                 <div className="mt-3 text-[13px] leading-[1.6] text-[#cfc6b6]/65">{item.body}</div>
               </motion.button>
             );

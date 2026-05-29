@@ -4,15 +4,18 @@ import { ArrowRight, BarChart3, LayoutGrid, MessageSquare } from "lucide-react";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
 import { TwineCaseStudyMediaFrame } from "./TwineCaseStudyMediaFrame";
 
-const MESSAGING_FLOW_BEFORE_AFTER_SRC = "/images/twine-messaging-flow-before-after.png";
+const MESSAGING_FLOW_BEFORE_AFTER_SRC =
+  "/images/twine-messaging-flow-before-after.png?v=20260528c";
+const INSIGHTS_DASHBOARD_BEFORE_AFTER_SRC =
+  "/images/twine-insights-dashboard-before-after.png?v=20260528";
+
+const BROWSING_BEFORE_AFTER_SRC = "/images/twine-browsing-before-after.png?v=20260528";
 
 type RedesignItem = {
   id: string;
   icon: ElementType<{ size?: number; strokeWidth?: number; className?: string }>;
   title: string;
-  body: string;
   reason: string;
-  outcome: string;
   comparisonSrc?: string;
   comparisonAlt?: string;
   beforeSrc?: string;
@@ -26,34 +29,31 @@ const REDESIGNS: RedesignItem[] = [
     id: "messaging",
     icon: MessageSquare,
     title: "Messaging Flow",
-    body: "Shifted from a dark generic chat pattern to guided quick questions and contextual attachment menus.",
     reason:
       "We changed it based on a majority vote for light mode and updated the design to better match what our participants are most familiar with when finding services, which is Instagram, by more closely mimicking its style.",
-    outcome:
-      "We moved to Twine's light UI with gator-led quick questions and contextual attachment menus so messaging feels guided from the first tap.",
     comparisonSrc: MESSAGING_FLOW_BEFORE_AFTER_SRC,
     comparisonAlt:
       "Twine messaging flow before and after: dark mode chat compared to light mode Instagram-style chat",
   },
   {
-    id: "discovery",
-    icon: LayoutGrid,
-    title: "Discovery Cards",
-    body: "Surfaced price, star ratings, and category filters up front so students can evaluate services at a glance.",
-    reason:
-      "Interviewees said trust was the deciding factor before booking, but the first card layout buried ratings, pricing, and portfolio proof below the fold.",
-    outcome:
-      "Cards were redesigned to surface price, star ratings, and category filters up front so students can evaluate services at a glance.",
-  },
-  {
     id: "analytics",
     icon: BarChart3,
     title: "Insights Dashboard",
-    body: "Simplified into earnings, profile views, clients, and ongoing projects — one screen that answers how am I doing.",
     reason:
-      "Student entrepreneurs wanted a broad snapshot of their business, not a dense analytics view that felt like a separate product.",
-    outcome:
-      "The dashboard was simplified into earnings, profile views, clients, and ongoing projects — one screen that answers how am I doing without extra digging.",
+      "We changed it to feel more modern and appealing to a younger audience, adding persuasion through praise to encourage entrepreneurs to keep earning.",
+    comparisonSrc: INSIGHTS_DASHBOARD_BEFORE_AFTER_SRC,
+    comparisonAlt:
+      "Twine insights dashboard before and after: dark analytics home compared to light insights with gator praise",
+  },
+  {
+    id: "browsing",
+    icon: LayoutGrid,
+    title: "Browsing",
+    reason:
+      "We decided on a more conservative design and focused heavily on images, mimicking Instagram and Pinterest layouts to pull people in through visuals, and moved these components to the search screen instead.",
+    comparisonSrc: BROWSING_BEFORE_AFTER_SRC,
+    comparisonAlt:
+      "Twine browsing before and after: structured discovery home compared to image-first Pinterest-style search feed",
   },
 ];
 
@@ -147,7 +147,7 @@ function BeforeAfterPlaceholder({ label }: { label: "Before" | "After" }) {
 
 function BeforeAfterComparison({ item }: { item: RedesignItem }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+    <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-10">
       <div className="space-y-4 lg:col-span-5">
         <div className="text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-accent)]/80">
           Why we changed it
@@ -155,41 +155,51 @@ function BeforeAfterComparison({ item }: { item: RedesignItem }) {
         <p className="text-[14px] leading-[1.75] text-[var(--portfolio-text-muted)] md:text-[15px]">
           {item.reason}
         </p>
-        <div className="text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/55">
-          What changed
-        </div>
-        <p className="text-[14px] leading-[1.75] text-[#cfc6b6]/70 md:text-[15px]">{item.outcome}</p>
       </div>
 
-      <div className="lg:col-span-7">
-        <TwineCaseStudyMediaFrame>
-          {item.comparisonSrc ? (
-            <ImageWithFallback
-              src={item.comparisonSrc}
-              alt={item.comparisonAlt ?? `${item.title} before and after`}
-              className="relative z-[1] mx-auto block h-auto w-auto max-w-full mix-blend-screen"
-              draggable={false}
-            />
-          ) : (
-            <div className="flex items-center gap-3 sm:gap-4">
-              <BeforeAfterFrame
-                label="Before"
-                src={item.beforeSrc}
-                alt={item.beforeAlt}
-                blendScreen={Boolean(item.beforeSrc)}
-              />
-              <div
-                className="hidden shrink-0 text-[var(--portfolio-text-muted)]/35 sm:flex sm:flex-col sm:items-center sm:gap-1"
-                aria-hidden
-              >
-                <ArrowRight size={18} strokeWidth={1.25} />
-              </div>
-              <BeforeAfterFrame label="After" src={item.afterSrc} alt={item.afterAlt} />
-            </div>
-          )}
-        </TwineCaseStudyMediaFrame>
+      <div className="min-w-0 lg:col-span-7">
+        <ComparisonMedia item={item} />
       </div>
     </div>
+  );
+}
+
+function ComparisonMedia({ item }: { item: RedesignItem }) {
+  if (item.comparisonSrc) {
+    return (
+      <figure className="min-w-0">
+        <TwineCaseStudyMediaFrame>
+          <ImageWithFallback
+            src={item.comparisonSrc}
+            alt={item.comparisonAlt ?? `${item.title} before and after`}
+            className="relative z-[1] mx-auto block h-auto w-full max-w-full mix-blend-screen"
+            draggable={false}
+            loading="eager"
+            decoding="sync"
+          />
+        </TwineCaseStudyMediaFrame>
+      </figure>
+    );
+  }
+
+  return (
+    <TwineCaseStudyMediaFrame>
+      <div className="flex items-center gap-3 sm:gap-4">
+        <BeforeAfterFrame
+          label="Before"
+          src={item.beforeSrc}
+          alt={item.beforeAlt}
+          blendScreen={Boolean(item.beforeSrc)}
+        />
+        <div
+          className="hidden shrink-0 text-[var(--portfolio-text-muted)]/35 sm:flex sm:flex-col sm:items-center sm:gap-1"
+          aria-hidden
+        >
+          <ArrowRight size={18} strokeWidth={1.25} />
+        </div>
+        <BeforeAfterFrame label="After" src={item.afterSrc} alt={item.afterAlt} />
+      </div>
+    </TwineCaseStudyMediaFrame>
   );
 }
 
@@ -240,20 +250,18 @@ export function RedesignSolutionsSection() {
                     : "border-[var(--portfolio-border)] bg-[var(--portfolio-card)]/60 hover:border-[var(--portfolio-text)]/55"
                 }`}
               >
-                <Icon
-                  size={22}
-                  strokeWidth={1.25}
-                  className={`transition-colors duration-300 ${
-                    isActive
-                      ? "text-[var(--portfolio-accent)]"
-                      : "text-[var(--portfolio-text-muted)] group-hover:text-[var(--portfolio-text)]"
-                  }`}
-                />
-                <div className="mt-6 text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/55">
-                  0{i + 1}
+                <div className="flex items-center gap-3">
+                  <Icon
+                    size={22}
+                    strokeWidth={1.25}
+                    className={`shrink-0 transition-colors duration-300 ${
+                      isActive
+                        ? "text-[var(--portfolio-accent)]"
+                        : "text-[var(--portfolio-text-muted)] group-hover:text-[var(--portfolio-text)]"
+                    }`}
+                  />
+                  <div className="text-[15px] text-[var(--portfolio-text)]">{item.title}</div>
                 </div>
-                <div className="mt-2 text-[15px] text-[var(--portfolio-text)]">{item.title}</div>
-                <div className="mt-3 text-[13px] leading-[1.6] text-[#cfc6b6]/65">{item.body}</div>
               </motion.button>
             );
           })}
@@ -269,9 +277,6 @@ export function RedesignSolutionsSection() {
               transition={{ duration: 0.35 }}
             >
               <BeforeAfterComparison item={activeItem} />
-              <p className="mt-4 text-center text-[10px] uppercase tracking-[0.28em] text-[var(--portfolio-text-muted)]/45">
-                {activeItem.title}
-              </p>
             </motion.div>
           </AnimatePresence>
         </div>

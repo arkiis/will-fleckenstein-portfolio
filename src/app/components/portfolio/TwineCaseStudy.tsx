@@ -47,13 +47,9 @@ export function TwineCaseStudy({
       <InitialStruggleSection />
       <WhatIDidSection />
       <RedesignSolutionsSection />
-      <Research />
       <PainPoints />
-      <Findings />
-      <Personas />
       <Brand />
       <Principles />
-      <Screens project={project} />
       <Closing project={project} onNavigate={onNavigate} />
     </article>
   );
@@ -334,7 +330,7 @@ function PainPoints() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="05" label="User pain points" />
+        <SectionLabel n="04" label="User pain points" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -754,7 +750,7 @@ function Brand() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="08" label="Brand identity" />
+        <SectionLabel n="05" label="Brand identity" />
 
         {/* Intro */}
         <motion.div
@@ -981,7 +977,7 @@ function Principles() {
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="09" label="Design principles" />
+        <SectionLabel n="06" label="Design principles" />
         <h2
           className="mb-14 max-w-[1000px] leading-[1.2] tracking-[-0.01em] text-[var(--portfolio-text)]"
           style={{
@@ -1146,7 +1142,7 @@ function Closing({
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="11" label="Special thanks" />
+        <SectionLabel n="07" label="Special thanks" />
 
         <div className="grid gap-12 md:grid-cols-12">
           <motion.div

@@ -24,6 +24,7 @@ import twineHeroDemoVideo from "../../../imports/twine-hero-demo.mp4";
 import twineLogo from "../../../imports/twine-logo.png";
 import { InitialStruggleSection } from "./twine/InitialStruggleSection";
 import { WhatIDidSection } from "./twine/WhatIDidSection";
+import { RedesignSolutionsSection } from "./twine/RedesignSolutionsSection";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Nav } from "./Nav";
 
@@ -45,6 +46,7 @@ export function TwineCaseStudy({
       <Hero project={project} colors={colors} />
       <InitialStruggleSection />
       <WhatIDidSection />
+      <RedesignSolutionsSection />
       <Research />
       <PainPoints />
       <Findings />
@@ -197,7 +199,7 @@ function Research() {
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="03" label="Research approach" />
+        <SectionLabel n="04" label="Research approach" />
 
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -332,7 +334,7 @@ function PainPoints() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="04" label="User pain points" />
+        <SectionLabel n="05" label="User pain points" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -434,7 +436,7 @@ function Findings() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="05" label="What both sides said" />
+        <SectionLabel n="06" label="What both sides said" />
 
         <div className="grid gap-4 md:grid-cols-2">
           <ComparisonColumn
@@ -626,7 +628,7 @@ function Personas() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="06" label="User personas" />
+        <SectionLabel n="07" label="User personas" />
 
         <div className="grid gap-6 md:grid-cols-2">
           {personas.map((p, i) => {
@@ -752,7 +754,7 @@ function Brand() {
       className="relative scroll-mt-24 py-32 md:py-44"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="07" label="Brand identity" />
+        <SectionLabel n="08" label="Brand identity" />
 
         {/* Intro */}
         <motion.div
@@ -979,7 +981,7 @@ function Principles() {
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="08" label="Design principles" />
+        <SectionLabel n="09" label="Design principles" />
         <h2
           className="mb-14 max-w-[1000px] leading-[1.2] tracking-[-0.01em] text-[var(--portfolio-text)]"
           style={{
@@ -1039,7 +1041,7 @@ function Screens({ project: _project }: { project: ReturnType<typeof findProject
   return (
     <section id="screens" className="relative scroll-mt-24 py-32 md:py-44">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="09" label="Final solution" />
+        <SectionLabel n="10" label="Final solution" />
 
         <div className="grid gap-12 md:grid-cols-12">
           <motion.div
@@ -1144,7 +1146,7 @@ function Closing({
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="10" label="Special thanks" />
+        <SectionLabel n="11" label="Special thanks" />
 
         <div className="grid gap-12 md:grid-cols-12">
           <motion.div

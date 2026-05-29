@@ -1,44 +1,49 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, type ElementType } from "react";
-import { PenLine, MonitorSmartphone, Palette } from "lucide-react";
-import gatorLogo from "../../../../imports/gator_UI_logo.png";
-import { AffinityMappingEvidence } from "./AffinityMappingEvidence";
-import { MessagingDesignEvolution } from "./MessagingDesignEvolution";
-import { WhatIDidEvidenceFigure } from "./WhatIDidEvidenceFigure";
+import { BarChart3, LayoutGrid, MessageSquare } from "lucide-react";
+import { ImageWithFallback } from "../../figma/ImageWithFallback";
+import { TwineCaseStudyMediaFrame, MEDIA_FRAME_BACKGROUND_SOFT } from "./TwineCaseStudyMediaFrame";
+
+const COMMUNICATION_SCREENS_SRC = "/images/twine-communication-screens.png";
+const ANALYTICS_SCREENS_SRC = "/images/twine-analytics-screens.png";
+const BROWSING_SCREENS_SRC = "/images/twine-browsing-screens.png";
 
 type WhatIDidItem = {
   id: string;
   icon: ElementType<{ size?: number; strokeWidth?: number; className?: string }>;
   title: string;
   body: string;
-  evidenceSrc?: string;
-  evidenceAlt?: string;
-  fadeBottom?: boolean;
-  evidenceImageClassName?: string;
+  evidenceSrc: string;
+  evidenceAlt: string;
 };
 
 const ITEMS: WhatIDidItem[] = [
   {
-    id: "screens",
-    icon: MonitorSmartphone,
-    title: "Low & hi-fidelity screens",
-    body: "Iterated messaging from an early dark chat pattern into Twine's light UI — inbox, threads, and gator-led conversation starters.",
+    id: "communication",
+    icon: MessageSquare,
+    title: "Communication Screens",
+    body: "Messaging in one central location from producer to consumer, an all in one place for chat, contextual project guidance, and service management.",
+    evidenceSrc: COMMUNICATION_SCREENS_SRC,
+    evidenceAlt:
+      "Twine communication screens: messages inbox, chat with attachment menu, and conversation starter with quick questions",
   },
   {
-    id: "affinity",
-    icon: PenLine,
-    title: "Affinity mapping & synthesis",
-    body: "After semi-structured interviews with seven UF students across both sides of the marketplace, I clustered raw quotes into themes and translated them into design opportunities.",
+    id: "analytics",
+    icon: BarChart3,
+    title: "Analytics Screens",
+    body: "An insights dashboard for student entrepreneurs, providing a broad view of earnings, profile views, clients, and ongoing projects.",
+    evidenceSrc: ANALYTICS_SCREENS_SRC,
+    evidenceAlt:
+      "Twine analytics screens: insights dashboard with earnings and ongoing projects, plus earnings detail with withdrawal and year filters",
   },
   {
-    id: "brand",
-    icon: Palette,
-    title: "Logo & brand iteration",
-    body: "Explored multiple logo directions before landing on a knot mark with an embedded gator.",
-    evidenceSrc: gatorLogo,
-    evidenceAlt: "Twine final logo mark with gator inside the knot",
-    evidenceImageClassName:
-      "mx-auto block h-auto max-h-[min(380px,48vh)] w-auto max-w-[min(100%,520px)] object-contain py-10",
+    id: "browsing",
+    icon: LayoutGrid,
+    title: "Browsing Screens",
+    body: "A discovery feed with category filters, trust signals, and a masonry layout built for scanning campus services quickly.",
+    evidenceSrc: BROWSING_SCREENS_SRC,
+    evidenceAlt:
+      "Twine browsing screens: discovery home with categories and recently viewed, plus service detail with reviews",
   },
 ];
 
@@ -52,8 +57,27 @@ function SectionLabel({ n, label }: { n: string; label: string }) {
   );
 }
 
+function DesignEvidence({ item }: { item: WhatIDidItem }) {
+  const isBrowsing = item.id === "browsing";
+
+  return (
+    <figure className="min-w-0">
+      <TwineCaseStudyMediaFrame background={isBrowsing ? MEDIA_FRAME_BACKGROUND_SOFT : undefined}>
+        <ImageWithFallback
+          src={item.evidenceSrc}
+          alt={item.evidenceAlt}
+          className="relative z-[1] mx-auto block h-auto w-auto max-w-full mix-blend-screen"
+          draggable={false}
+          loading="eager"
+          decoding="sync"
+        />
+      </TwineCaseStudyMediaFrame>
+    </figure>
+  );
+}
+
 export function WhatIDidSection() {
-  const [activeId, setActiveId] = useState("screens");
+  const [activeId, setActiveId] = useState("communication");
   const activeItem = ITEMS.find((item) => item.id === activeId) ?? ITEMS[0];
 
   return (
@@ -72,8 +96,9 @@ export function WhatIDidSection() {
             fontWeight: 300,
           }}
         >
-          My role across the <span className="italic">research</span>,{" "}
-          <span className="italic">design</span>, and <span className="italic">brand</span> work.
+          The screens I designed across{" "}
+          <span className="italic">messaging</span>, <span className="italic">analytics</span>, and{" "}
+          <span className="italic">discovery</span>.
         </motion.h2>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -124,18 +149,7 @@ export function WhatIDidSection() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35 }}
             >
-              {activeItem.id === "affinity" ? (
-                <AffinityMappingEvidence />
-              ) : activeItem.id === "screens" ? (
-                <MessagingDesignEvolution />
-              ) : (
-                <WhatIDidEvidenceFigure
-                  src={activeItem.evidenceSrc!}
-                  alt={activeItem.evidenceAlt!}
-                  fadeBottom={activeItem.fadeBottom}
-                  imageClassName={activeItem.evidenceImageClassName}
-                />
-              )}
+              <DesignEvidence item={activeItem} />
               <p className="mt-4 text-center text-[10px] uppercase tracking-[0.28em] text-[var(--portfolio-text-muted)]/45">
                 {activeItem.title}
               </p>

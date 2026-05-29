@@ -1,10 +1,6 @@
 import { motion } from "motion/react";
 import { useState, useEffect, type ReactNode } from "react";
 import {
-  EyeOff,
-  ShieldQuestion,
-  Compass,
-  BarChart3,
   Camera,
   GraduationCap,
   Quote as QuoteIcon,
@@ -25,6 +21,7 @@ import twineLogo from "../../../imports/twine-logo.png";
 import { InitialStruggleSection } from "./twine/InitialStruggleSection";
 import { WhatIDidSection } from "./twine/WhatIDidSection";
 import { RedesignSolutionsSection } from "./twine/RedesignSolutionsSection";
+import { PainPointsSection } from "./twine/PainPointsSection";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Nav } from "./Nav";
 
@@ -47,7 +44,7 @@ export function TwineCaseStudy({
       <InitialStruggleSection />
       <WhatIDidSection />
       <RedesignSolutionsSection />
-      <PainPoints />
+      <PainPointsSection />
       <Brand />
       <Principles />
       <Closing project={project} onNavigate={onNavigate} />
@@ -291,121 +288,6 @@ function Research() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ────────────────────────────────────────────────────────── */
-/*  PAIN POINTS — split by role                              */
-/* ────────────────────────────────────────────────────────── */
-
-function PainPoints() {
-  const entrepreneur = [
-    {
-      icon: EyeOff,
-      title: "No visibility",
-      body: "Most students never discover the services they offer.",
-    },
-    {
-      icon: BarChart3,
-      title: "No tools to grow",
-      body: "Communication and tracking are scattered across DMs, forms, and notes.",
-    },
-  ];
-  const consumer = [
-    {
-      icon: Compass,
-      title: "Broken discovery",
-      body: "There's no central place to browse, compare, or find what's nearby.",
-    },
-    {
-      icon: ShieldQuestion,
-      title: "Trust gaps",
-      body: "Quality is hard to verify before booking, since reviews live everywhere and nowhere.",
-    },
-  ];
-
-  return (
-    <section
-      id="pain-points"
-      className="relative scroll-mt-24 py-32 md:py-44"
-    >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="04" label="User pain points" />
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="mb-14 max-w-[900px] leading-[1.1] tracking-[-0.01em] text-[var(--portfolio-text)]"
-          style={{
-            fontFamily: "var(--portfolio-display-font)",
-            fontSize: "clamp(28px, 3.6vw, 48px)",
-            fontWeight: 300,
-          }}
-        >
-          Two roles, two{" "}
-          <span className="italic text-[var(--portfolio-accent)]">biggest</span> frictions each.
-        </motion.h2>
-
-        <div className="grid gap-10 md:grid-cols-2">
-          <PainColumn tone="cool" label="Entrepreneurs" items={entrepreneur} />
-          <PainColumn tone="warm" label="Consumers" items={consumer} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PainColumn({
-  tone,
-  label,
-  items,
-}: {
-  tone: "warm" | "cool";
-  label: string;
-  items: { icon: typeof EyeOff; title: string; body: string }[];
-}) {
-  const accent = tone === "warm" ? "var(--portfolio-accent)" : "var(--portfolio-secondary)";
-  return (
-    <div>
-      <div
-        className="mb-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.32em]"
-        style={{ color: accent }}
-      >
-        <span
-          className="inline-block h-1.5 w-1.5 rounded-full"
-          style={{ background: accent }}
-        />
-        {label}
-      </div>
-      <div className="flex flex-col gap-4">
-        {items.map((c, i) => (
-          <motion.div
-            key={c.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.9, delay: i * 0.08 }}
-            className="rounded-sm border border-[var(--portfolio-border)]/10 bg-[var(--portfolio-card)] p-6 transition-colors hover:border-[var(--portfolio-accent)]/30"
-          >
-            <div className="flex items-start gap-4">
-              <c.icon
-                size={22}
-                strokeWidth={1.25}
-                style={{ color: accent }}
-                className="mt-1 shrink-0"
-              />
-              <div>
-                <div className="text-[15px] text-[var(--portfolio-text)]">{c.title}</div>
-                <div className="mt-2 text-[13.5px] leading-[1.65] text-[#cfc6b6]/70">
-                  {c.body}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
   );
 }
 

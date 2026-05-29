@@ -22,9 +22,12 @@ export default defineConfig({
     assetsInlineLimit: 0,
   },
   server: {
-    // Large PNGs in public/ can trigger Windows EBUSY watcher crashes
+    // Large PNGs can trigger Windows EBUSY watcher crashes
     watch: {
-      ignored: ['**/public/images/**'],
+      ignored: [
+        '**/public/images/**',
+        '**/src/imports/twine-*.png',
+      ],
     },
   },
   plugins: [

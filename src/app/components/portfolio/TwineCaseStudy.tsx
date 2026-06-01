@@ -23,6 +23,8 @@ import { WhatIDidSection } from "./twine/WhatIDidSection";
 import { RedesignSolutionsSection } from "./twine/RedesignSolutionsSection";
 import { PainPointsSection } from "./twine/PainPointsSection";
 import { useTheme } from "../../contexts/ThemeContext";
+import { useCaseStudyScrollTracking } from "../../hooks/useCaseStudyScrollTracking";
+import { analytics } from "../../lib/analytics";
 import { Nav } from "./Nav";
 
 export function TwineCaseStudy({
@@ -32,6 +34,8 @@ export function TwineCaseStudy({
 }) {
   const project = findProject("twine") ?? projects[0];
   const { colors } = useTheme();
+
+  useCaseStudyScrollTracking("twine");
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -121,6 +125,9 @@ function Hero({
               className="underline-offset-2 transition-colors hover:underline"
               style={{ color: colors.accent }}
               data-cursor="hover"
+              onClick={() =>
+                analytics.externalLinkClick("twine", "syllabus_user_experience")
+              }
             >
               User Experience
             </a>{" "}
@@ -882,6 +889,9 @@ function Principles() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hover"
+              onClick={() =>
+                analytics.externalLinkClick("twine", `principle_${p.t}`)
+              }
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1085,7 +1095,11 @@ function Closing({
         </div>
 
         <button
-          onClick={() => onNavigate(next.slug)}
+          type="button"
+          onClick={() => {
+            analytics.caseStudyNext("twine", next.slug);
+            onNavigate(next.slug);
+          }}
           data-cursor="hover"
           className="group mt-24 block w-full text-left"
         >
@@ -1120,7 +1134,14 @@ function Closing({
         </button>
 
         <div className="mt-24 flex flex-wrap items-end justify-between gap-4 border-t border-[var(--portfolio-border)]/10 pt-6 text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/40">
-          <button onClick={() => onNavigate(null)} className="hover:text-[var(--portfolio-accent)]">
+          <button
+            type="button"
+            onClick={() => {
+              analytics.caseStudyBackIndex("twine");
+              onNavigate(null);
+            }}
+            className="hover:text-[var(--portfolio-accent)]"
+          >
             ← Back to index
           </button>
           <span>© 2026 William Fleckenstein</span>

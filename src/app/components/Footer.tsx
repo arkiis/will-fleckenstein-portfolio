@@ -1,4 +1,5 @@
 import { Linkedin, Heart } from "lucide-react";
+import { analytics } from "../lib/analytics";
 
 export default function Footer() {
   return (
@@ -17,6 +18,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-700 hover:text-black transition-colors"
+              onClick={() => analytics.footerLinkedIn()}
             >
               <Linkedin size={20} />
               <span>LinkedIn</span>

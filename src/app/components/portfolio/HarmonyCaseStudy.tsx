@@ -18,6 +18,8 @@ import {
 import { ImageLoader } from "./ImageLoader";
 import { findProject, projects } from "./projects";
 import { useTheme } from "../../contexts/ThemeContext";
+import { useCaseStudyScrollTracking } from "../../hooks/useCaseStudyScrollTracking";
+import { analytics } from "../../lib/analytics";
 import { Nav } from "./Nav";
 import harmoniaLogo from "../../../imports/harmonia_logo.png";
 import harmoniaMockup from "../../../imports/harmonia-phone-mockup.png";
@@ -48,6 +50,8 @@ export function HarmonyCaseStudy({
 }) {
   const project = findProject("harmony") ?? projects[1];
   const { theme, colors } = useTheme();
+
+  useCaseStudyScrollTracking("harmony");
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -1098,7 +1102,11 @@ function Closing({
         </div>
 
         <button
-          onClick={() => onNavigate(next.slug)}
+          type="button"
+          onClick={() => {
+            analytics.caseStudyNext("harmony", next.slug);
+            onNavigate(next.slug);
+          }}
           data-cursor="hover"
           className="group mt-24 block w-full text-left"
         >
@@ -1134,7 +1142,11 @@ function Closing({
 
         <div className="mt-24 flex flex-wrap items-end justify-between gap-4 border-t border-[var(--portfolio-border)]/10 pt-6 text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-text-muted)]/40">
           <button
-            onClick={() => onNavigate(null)}
+            type="button"
+            onClick={() => {
+              analytics.caseStudyBackIndex("harmony");
+              onNavigate(null);
+            }}
             className="hover:text-[var(--portfolio-accent)]"
           >
             ← Back to index

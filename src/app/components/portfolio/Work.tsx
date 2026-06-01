@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { projects, type CaseStudy } from "./projects";
 import { useTheme } from "../../contexts/ThemeContext";
+import { analytics } from "../../lib/analytics";
 
 export function Work({ onOpen }: { onOpen: (slug: string) => void }) {
   const { colors, displayFont } = useTheme();
@@ -62,7 +63,10 @@ function ProjectCard({
   return (
     <button
       type="button"
-      onClick={() => onOpen(project.slug)}
+      onClick={() => {
+        analytics.workProjectClick(project.slug);
+        onOpen(project.slug);
+      }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       data-cursor="hover"

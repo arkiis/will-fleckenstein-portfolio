@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useActiveSection } from "../../hooks/useActiveSection";
+import { analytics } from "../../lib/analytics";
 
 const SECTIONS = [
   { id: "work", label: "Work" },
@@ -53,6 +54,10 @@ export function Nav() {
           if (!isActive) e.currentTarget.style.color = `${colors.text}99`;
         }}
         data-cursor="hover"
+        onClick={() => {
+          analytics.navSectionClick(id);
+          handleLinkClick();
+        }}
       >
         {label}
         <motion.span

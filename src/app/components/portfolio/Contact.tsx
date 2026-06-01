@@ -2,6 +2,7 @@ import { type MouseEvent } from "react";
 import { motion } from "motion/react";
 import { toast, Toaster } from "sonner";
 import { useTheme } from "../../contexts/ThemeContext";
+import { analytics } from "../../lib/analytics";
 
 export function Contact() {
   const { colors, theme, displayFont } = useTheme();
@@ -126,11 +127,17 @@ function ContactLink({
   cursorLabel?: string;
 }) {
   const handleClick = (e: MouseEvent) => {
-    if (!copyValue) return;
-    e.preventDefault();
-    navigator.clipboard.writeText(copyValue).then(() => {
-      toast.success("Email copied to clipboard");
-    });
+    if (copyValue) {
+      e.preventDefault();
+      analytics.contactEmailCopy();
+      navigator.clipboard.writeText(copyValue).then(() => {
+        toast.success("Email copied to clipboard");
+      });
+      return;
+    }
+    if (label === "Read.cv") {
+      analytics.contactResumeOpen();
+    }
   };
 
   return (

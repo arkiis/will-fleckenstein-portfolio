@@ -5,6 +5,7 @@ import { findProject, projects, type CaseStudy } from "./projects";
 import { TwineCaseStudy } from "./TwineCaseStudy";
 import { HarmonyCaseStudy } from "./HarmonyCaseStudy";
 import { useTheme } from "../../contexts/ThemeContext";
+import { useCaseStudyScrollTracking } from "../../hooks/useCaseStudyScrollTracking";
 import { Nav } from "./Nav";
 
 export function CaseStudyPage({
@@ -18,6 +19,8 @@ export function CaseStudyPage({
   if (slug === "twine") return <TwineCaseStudy onNavigate={onNavigate} />;
   const project = findProject(slug) ?? projects[0];
   const { theme, colors } = useTheme();
+
+  useCaseStudyScrollTracking(slug);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });

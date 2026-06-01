@@ -29,6 +29,10 @@ import harmoniaCreateTaskScreen from "../../../imports/harmonia-create-task-scre
 import harmoniaHouseholdRules from "../../../imports/harmonia-household-rules.png";
 import harmoniaManageHousehold from "../../../imports/harmonia-manage-household.png";
 import harmoniaProfileScreen from "../../../imports/harmonia-profile-screen.png";
+import harmoniaOnboardingSleep from "../../../imports/harmonia-onboarding-sleep.png";
+import harmoniaOnboardingTemperature from "../../../imports/harmonia-onboarding-temperature.png";
+import harmoniaPainpointCreateTask from "../../../imports/harmonia-painpoint-create-task.png";
+import harmoniaPainpointHomePage from "../../../imports/harmonia-painpoint-home-page.png";
 
 /* ────────────────────────────────────────────────────────── */
 /*  Brand palette — aesthetic purple, scoped to this page     */
@@ -664,7 +668,7 @@ const PAIN_POINTS: PainPointItem[] = [
       "Conflicts rarely come from not knowing the rules. They come from a lack of accountability and shared responsibility for the household.",
     solutionTitle: "Profiles, household rules, and visible rotation",
     solutionBody:
-      "Each roommate has a profile tied to the household, with rules and chore rotation order everyone can see. When responsibility is shared and visible, accountability comes from the system instead of passive-aggressive notes on the fridge.",
+      "Each roommate has a profile tied to the household, with rules and chore rotation order everyone can see. When responsibility is shared and visible, accountability comes from the system instead of notes on the fridge that feel personal.",
     screens: [
       {
         kind: "scroll",
@@ -683,13 +687,26 @@ const PAIN_POINTS: PainPointItem[] = [
   {
     id: "temperature",
     icon: Thermometer,
-    painTitle: "Temperature clashes",
+    painTitle: "Temperature and quiet hours",
     painBody:
-      "Some roommates cope with space heaters, extra layers, or personal AC. Others try to meet in the middle on the thermostat. Neither works if no one owns the shared decision.",
-    solutionTitle: "Household preferences and shared rules",
+      "Some roommates cope with space heaters, extra layers, or personal AC. Others try to meet in the middle on the thermostat. Late nights and early mornings add another layer when sleep schedules clash and no one agrees on when the apartment should stay quiet.",
+    solutionTitle: "Onboarding that builds household rules",
     solutionBody:
-      "Roommates capture temperature preferences up front and agree on thermostat norms in household rules, so the compromise is shared rather than one-sided.",
-    screens: [{ kind: "placeholder", icon: Thermometer, label: "House rules" }],
+      "We created an onboarding flow that asks when each roommate usually sleeps and what temperature they prefer at home. Those answers help the household set quiet hours and thermostat norms together before small disagreements turn into recurring tension.",
+    screens: [
+      {
+        kind: "scroll",
+        src: harmoniaOnboardingSleep,
+        alt: "Harmonia onboarding screen asking what time you usually sleep with a time range picker",
+        label: "Quiet hours",
+      },
+      {
+        kind: "scroll",
+        src: harmoniaOnboardingTemperature,
+        alt: "Harmonia onboarding screen asking preferred room temperature with a slider from 60 to 80 degrees",
+        label: "Temperature preference",
+      },
+    ],
   },
   {
     id: "recurring-chores",
@@ -700,7 +717,12 @@ const PAIN_POINTS: PainPointItem[] = [
     solutionTitle: "Recurring tasks assigned to roommates",
     solutionBody:
       "Chores can repeat on a schedule and rotate across roommates, so vacuuming, trash, dishes, and the rest have a clear owner instead of becoming someone else's problem.",
-    screens: [{ kind: "placeholder", icon: CalendarDays, label: "Create Tasks" }],
+    screens: [{
+      kind: "scroll",
+      src: harmoniaPainpointCreateTask,
+      alt: "Harmonia create task screen with fields for task details and assignees",
+      label: "Create Tasks",
+    }],
   },
   {
     id: "tension",
@@ -711,7 +733,12 @@ const PAIN_POINTS: PainPointItem[] = [
     solutionTitle: "Lighthearted gamification",
     solutionBody:
       "Gamified progress and positive feedback make getting chores done feel more collaborative and lighthearted, giving roommates a reason to come together instead of avoiding the conversation.",
-    screens: [{ kind: "placeholder", icon: Trophy, label: "Home dashboard" }],
+    screens: [{
+      kind: "scroll",
+      src: harmoniaPainpointHomePage,
+      alt: "Harmonia home page with upcoming tasks, events, and gamified progress",
+      label: "Home Page",
+    }],
   },
 ];
 

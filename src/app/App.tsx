@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { pageview } from "@vercel/analytics";
+import { useEffect, useRef, useState } from "react";
 import { Hero } from "./components/portfolio/Hero";
 import { Work } from "./components/portfolio/Work";
 import { About } from "./components/portfolio/About";
@@ -51,6 +52,16 @@ function AppContent() {
       window.removeEventListener("hashchange", onHash);
     };
   }, []);
+
+  const isInitialPageview = useRef(true);
+  useEffect(() => {
+    const path = slug ? `/case/${slug}` : "/";
+    if (isInitialPageview.current) {
+      isInitialPageview.current = false;
+      if (!slug) return;
+    }
+    pageview({ path });
+  }, [slug]);
 
   const navigate = (next: string | null) => {
     if (next) {

@@ -8,16 +8,12 @@ import {
   type CSSProperties,
 } from "react";
 import {
-  MessageSquareOff,
-  Scale,
   Repeat,
   Flame,
-  PenLine,
-  Smile,
-  Home,
+  Thermometer,
+  Trophy,
   CalendarDays,
   ListChecks,
-  ArrowRight,
 } from "lucide-react";
 import { ImageLoader } from "./ImageLoader";
 import { findProject, projects } from "./projects";
@@ -32,6 +28,7 @@ import harmoniaCalendarScreen from "../../../imports/harmonia-calendar-screen.pn
 import harmoniaCreateTaskScreen from "../../../imports/harmonia-create-task-screen.png";
 import harmoniaHouseholdRules from "../../../imports/harmonia-household-rules.png";
 import harmoniaManageHousehold from "../../../imports/harmonia-manage-household.png";
+import harmoniaProfileScreen from "../../../imports/harmonia-profile-screen.png";
 
 /* ────────────────────────────────────────────────────────── */
 /*  Brand palette — aesthetic purple, scoped to this page     */
@@ -69,7 +66,6 @@ export function HarmonyCaseStudy({
       <Hero project={project} colors={colors} accent={purple.accent} />
       <InitialStruggleSection />
       <WhatIDidSection />
-      <RedesignSolutionsSection />
       <PainPointsSection />
       <Brand />
       <Closing project={project} onNavigate={onNavigate} />
@@ -355,7 +351,7 @@ function Hero({
             For our{" "}
             <span style={{ color: accent }}>First Year Design Team</span> project in
             Spring 2026, a team of six set out to design{" "}
-            <span style={{ color: accent }}>Harmonia</span> — a roommate
+            <span style={{ color: accent }}>Harmonia</span>, a roommate
             communication app that helps college roommates communicate, share, and
             coexist without the friction of unspoken expectations. I worked across
             research, interaction design, and the brand identity.
@@ -642,166 +638,12 @@ function WhatIDidSection() {
 }
 
 /* ────────────────────────────────────────────────────────── */
-/*  03 — REDESIGN SOLUTIONS (lo-fi → hi-fi)                   */
+/*  03 — USER PAIN POINTS (vertical tabs)                     */
 /* ────────────────────────────────────────────────────────── */
 
-type RedesignItem = {
-  id: string;
-  icon: ElementType<{ size?: number; strokeWidth?: number; className?: string }>;
-  title: string;
-  reason: string;
-  beforeLabel: string;
-  afterLabel: string;
-};
-
-const REDESIGNS: RedesignItem[] = [
-  {
-    id: "home",
-    icon: Home,
-    title: "Home & tasks",
-    reason:
-      "The low-fidelity home packed everything into one dense list. We split upcoming, to-do, and events into clear sections and brought in calm purple surfaces so the screen feels supportive rather than overwhelming.",
-    beforeLabel: "Lo-fi home",
-    afterLabel: "Hi-fi home",
-  },
-  {
-    id: "rules",
-    icon: Scale,
-    title: "Household rules",
-    reason:
-      "Early rules screens were plain text blocks. We grouped quiet hours, cleaning, guests, and shared items into scannable cards so expectations are easy to set and revisit together.",
-    beforeLabel: "Lo-fi rules",
-    afterLabel: "Hi-fi rules",
-  },
-  {
-    id: "onboarding",
-    icon: PenLine,
-    title: "Onboarding",
-    reason:
-      "We turned a long form into a friendly questionnaire — one question per step about sleep, temperature, and cleanliness — so new roommates set preferences without feeling interrogated.",
-    beforeLabel: "Lo-fi onboarding",
-    afterLabel: "Hi-fi onboarding",
-  },
-];
-
-function BeforeAfter({ item }: { item: RedesignItem }) {
-  return (
-    <div className="flex flex-col gap-8 md:gap-10">
-      <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-        <div className="space-y-4 lg:col-span-5">
-          <div className="text-[11px] uppercase tracking-[0.22em] text-[var(--portfolio-accent)]/80">
-            Why we changed it
-          </div>
-          <p className="text-[14px] leading-[1.75] text-[var(--portfolio-text-muted)] md:text-[15px]">
-            {item.reason}
-          </p>
-        </div>
-      </div>
-
-      <MediaFrame>
-        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8">
-          <div className="flex flex-col items-center gap-3">
-            <PhonePlaceholder icon={item.icon} label={item.beforeLabel} tag="Before · lo-fi" />
-          </div>
-          <ArrowRight
-            size={28}
-            strokeWidth={1.4}
-            className="hidden text-[var(--portfolio-accent)] sm:block"
-          />
-          <div className="flex flex-col items-center gap-3">
-            <PhonePlaceholder icon={item.icon} label={item.afterLabel} tag="After · hi-fi" />
-          </div>
-        </div>
-      </MediaFrame>
-    </div>
-  );
-}
-
-function RedesignSolutionsSection() {
-  const [activeId, setActiveId] = useState(REDESIGNS[0].id);
-  const activeItem = REDESIGNS.find((i) => i.id === activeId) ?? REDESIGNS[0];
-
-  return (
-    <section
-      id="redesign-solutions"
-      className="relative scroll-mt-24 border-t border-[var(--portfolio-border)]/10 py-20 md:py-28"
-    >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="03" label="Redesign solutions" />
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="mb-14 max-w-[900px] leading-[1.1] tracking-[-0.01em] text-[var(--portfolio-text)]"
-          style={{
-            fontFamily: "var(--portfolio-display-font)",
-            fontSize: "clamp(28px, 3.6vw, 48px)",
-            fontWeight: 300,
-          }}
-        >
-          How screens evolved from <span className="italic">low-fidelity</span> to{" "}
-          <span className="italic">high-fidelity</span>.
-        </motion.h2>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {REDESIGNS.map((item, i) => {
-            const isActive = activeId === item.id;
-            const Icon = item.icon;
-            return (
-              <motion.button
-                key={item.id}
-                type="button"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.9, delay: i * 0.08 }}
-                onClick={() => setActiveId(item.id)}
-                aria-pressed={isActive}
-                className={`group relative w-full rounded-sm border p-6 text-left transition-colors duration-300 ${
-                  isActive
-                    ? "border-[var(--portfolio-accent)]/45 bg-[var(--portfolio-card)]"
-                    : "border-[var(--portfolio-border)] bg-[var(--portfolio-card)]/60 hover:border-[var(--portfolio-text)]/55"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Icon
-                    size={22}
-                    strokeWidth={1.25}
-                    className={`shrink-0 transition-colors duration-300 ${
-                      isActive
-                        ? "text-[var(--portfolio-accent)]"
-                        : "text-[var(--portfolio-text-muted)] group-hover:text-[var(--portfolio-text)]"
-                    }`}
-                  />
-                  <div className="text-[15px] text-[var(--portfolio-text)]">{item.title}</div>
-                </div>
-              </motion.button>
-            );
-          })}
-        </div>
-
-        <div className="mt-8 md:mt-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeItem.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35 }}
-            >
-              <BeforeAfter item={activeItem} />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ────────────────────────────────────────────────────────── */
-/*  04 — USER PAIN POINTS (vertical tabs)                     */
-/* ────────────────────────────────────────────────────────── */
+type PainPointScreen =
+  | { kind: "scroll"; src: string; alt: string; label: string }
+  | { kind: "placeholder"; icon: ScreenIcon; label: string };
 
 type PainPointItem = {
   id: string;
@@ -810,49 +652,66 @@ type PainPointItem = {
   painBody: string;
   solutionTitle: string;
   solutionBody: string;
-  screen: { icon: ElementType<{ size?: number; strokeWidth?: number; className?: string }>; label: string };
+  screens: PainPointScreen[];
 };
 
 const PAIN_POINTS: PainPointItem[] = [
   {
-    id: "irresponsibility",
+    id: "accountability",
     icon: Repeat,
-    painTitle: "Irresponsibility",
-    painBody: "Roommates not following through on agreed tasks or shared responsibilities.",
-    solutionTitle: "Neutral reminders and shared task visibility",
+    painTitle: "Accountability",
+    painBody:
+      "Conflicts rarely come from not knowing the rules. They come from a lack of accountability and shared responsibility for the household.",
+    solutionTitle: "Profiles, household rules, and visible rotation",
     solutionBody:
-      "Tasks live in one shared list with gentle, automatic reminders, so accountability comes from the system rather than from a roommate having to nag.",
-    screen: { icon: ListChecks, label: "Shared task list" },
+      "Each roommate has a profile tied to the household, with rules and chore rotation order everyone can see. When responsibility is shared and visible, accountability comes from the system instead of passive-aggressive notes on the fridge.",
+    screens: [
+      {
+        kind: "scroll",
+        src: harmoniaProfileScreen,
+        alt: "Harmonia profile screen with photo, name, and household account settings",
+        label: "Profile",
+      },
+      {
+        kind: "scroll",
+        src: harmoniaHouseholdRules,
+        alt: "Harmonia household rules screen with roommates, shared rules, and chore rotation order",
+        label: "Household Rules",
+      },
+    ],
   },
   {
-    id: "unfairness",
-    icon: Scale,
-    painTitle: "Unfairness",
-    painBody: "A sense that some roommates contribute more than others to household work.",
-    solutionTitle: "A fair, transparent chore rotation",
+    id: "temperature",
+    icon: Thermometer,
+    painTitle: "Temperature clashes",
+    painBody:
+      "Some roommates cope with space heaters, extra layers, or personal AC. Others try to meet in the middle on the thermostat. Neither works if no one owns the shared decision.",
+    solutionTitle: "Household preferences and shared rules",
     solutionBody:
-      "A rotation engine distributes chores evenly and shows everyone's history, so the split feels balanced and visible instead of assumed.",
-    screen: { icon: Repeat, label: "Chore rotation" },
+      "Roommates capture temperature preferences up front and agree on thermostat norms in household rules, so the compromise is shared rather than one-sided.",
+    screens: [{ kind: "placeholder", icon: Thermometer, label: "House rules" }],
   },
   {
-    id: "miscommunication",
-    icon: MessageSquareOff,
-    painTitle: "Miscommunication",
-    painBody: "Unclear expectations and avoided conversations that build up frustration.",
-    solutionTitle: "Household rules everyone agrees on",
+    id: "recurring-chores",
+    icon: ListChecks,
+    painTitle: "Recurring chores",
+    painBody:
+      "Vacuuming, trash, dishes, and other repeat tasks stack up fast when they aren't clearly assigned or scheduled.",
+    solutionTitle: "Recurring tasks assigned to roommates",
     solutionBody:
-      "Quiet hours, cleaning, guests, and shared items are written down together during setup, giving roommates a shared reference instead of unspoken assumptions.",
-    screen: { icon: Scale, label: "House rules" },
+      "Chores can repeat on a schedule and rotate across roommates, so vacuuming, trash, dishes, and the rest have a clear owner instead of becoming someone else's problem.",
+    screens: [{ kind: "placeholder", icon: CalendarDays, label: "Create Tasks" }],
   },
   {
     id: "tension",
     icon: Flame,
     painTitle: "Tension",
-    painBody: "Growing resentment from repeated issues that go unaddressed or unresolved.",
-    solutionTitle: "A calm, supportive tone",
+    painBody:
+      "Small slights compound into resentment when chores feel like a scoreboard or a lecture waiting to happen.",
+    solutionTitle: "Lighthearted gamification",
     solutionBody:
-      "Copy and visuals read as supportive rather than confrontational, so the app lowers the temperature of difficult conversations instead of raising it.",
-    screen: { icon: Smile, label: "Home dashboard" },
+      "Gamified progress and positive feedback make getting chores done feel more collaborative and lighthearted, giving roommates a reason to come together instead of avoiding the conversation.",
+    screens: [{ kind: "placeholder", icon: Trophy, label: "Home dashboard" }],
   },
 ];
 
@@ -882,7 +741,7 @@ function PainPointsSection() {
       className="relative scroll-mt-24 border-t border-[var(--portfolio-border)]/10 py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="04" label="User pain points" />
+        <SectionLabel n="03" label="User pain points" />
 
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
           <div className="lg:col-span-5">
@@ -945,11 +804,19 @@ function PainPointsSection() {
               >
                 <MediaFrame>
                   <SolutionInFrame item={activeItem} />
-                  <div className="flex items-center justify-center pt-2">
-                    <PhonePlaceholder
-                      icon={activeItem.screen.icon}
-                      label={activeItem.screen.label}
-                    />
+                  <div className="flex flex-wrap items-start justify-center gap-6 pt-2 sm:gap-8">
+                    {activeItem.screens.map((s) =>
+                      s.kind === "scroll" ? (
+                        <PhoneAutoScroll
+                          key={s.label}
+                          src={s.src}
+                          alt={s.alt}
+                          label={s.label}
+                        />
+                      ) : (
+                        <PhonePlaceholder key={s.label} icon={s.icon} label={s.label} />
+                      )
+                    )}
                   </div>
                 </MediaFrame>
               </motion.div>
@@ -969,7 +836,7 @@ function Brand() {
   return (
     <section id="brand" className="relative scroll-mt-24 py-32 md:py-44">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="05" label="Brand identity" />
+        <SectionLabel n="04" label="Brand identity" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1153,7 +1020,7 @@ function Closing({
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionLabel n="06" label="Special thanks" />
+        <SectionLabel n="05" label="Special thanks" />
 
         <div className="grid gap-12 md:grid-cols-12">
           <motion.div

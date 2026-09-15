@@ -29,17 +29,6 @@ export function Contact() {
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <motion.div
-          className="mb-16 flex items-center gap-4 text-[11px] uppercase tracking-[0.32em]"
-          style={{ color: `${colors.text}8c` }}
-          initial={{ opacity: 0, x: -12 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="h-px w-10" style={{ backgroundColor: `${colors.text}33` }} />
-          <span>End credits</span>
-        </motion.div>
-
-        <motion.div
           className="space-y-3"
           initial="hidden"
           whileInView="visible"
@@ -81,15 +70,6 @@ export function Contact() {
         >
           <motion.div whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
             © 2026 William Fleckenstein
-          </motion.div>
-          <motion.div className="flex items-center gap-2">
-            <motion.span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: colors.accent }}
-              animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span>Fin.</span>
           </motion.div>
         </motion.div>
       </div>

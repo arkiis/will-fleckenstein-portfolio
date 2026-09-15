@@ -6,7 +6,6 @@ import { About } from "./components/portfolio/About";
 import { Contact } from "./components/portfolio/Contact";
 import { Nav } from "./components/portfolio/Nav";
 import { Grain } from "./components/portfolio/Grain";
-import { Cursor } from "./components/portfolio/Cursor";
 import { SmoothScroll } from "./components/portfolio/SmoothScroll";
 import { CaseStudyPage } from "./components/portfolio/CaseStudyPage";
 import { LoadingSkeleton } from "./components/portfolio/LoadingSkeleton";
@@ -83,7 +82,6 @@ function AppContent() {
     >
       {!slug && <SmoothScroll />}
       <Grain />
-      <Cursor />
 
       {/* Loading skeleton */}
       <div

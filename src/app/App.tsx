@@ -8,7 +8,6 @@ import { Nav } from "./components/portfolio/Nav";
 import { Grain } from "./components/portfolio/Grain";
 import { SmoothScroll } from "./components/portfolio/SmoothScroll";
 import { CaseStudyPage } from "./components/portfolio/CaseStudyPage";
-import { LoadingSkeleton } from "./components/portfolio/LoadingSkeleton";
 import { BODY_FONT } from "./constants/typography";
 import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 
@@ -19,37 +18,15 @@ function readSlugFromHash(): string | null {
 }
 
 function AppContent() {
-  const [loaded, setLoaded] = useState(false);
   const [slug, setSlug] = useState<string | null>(() =>
     typeof window === "undefined" ? null : readSlugFromHash(),
   );
   const { colors } = useTheme();
 
   useEffect(() => {
-    const minDisplayTime = 300; // Minimum skeleton display to prevent flash
-    const startTime = Date.now();
-
-    const handleLoad = () => {
-      const elapsedTime = Date.now() - startTime;
-      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
-
-      setTimeout(() => setLoaded(true), remainingTime);
-    };
-
-    // Wait for DOM content and initial resources
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-
     const onHash = () => setSlug(readSlugFromHash());
     window.addEventListener("hashchange", onHash);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-      window.removeEventListener("hashchange", onHash);
-    };
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   const isInitialPageview = useRef(true);
@@ -83,23 +60,7 @@ function AppContent() {
       {!slug && <SmoothScroll />}
       <Grain />
 
-      {/* Loading skeleton */}
-      <div
-        className="transition-opacity duration-700"
-        style={{
-          opacity: loaded ? 0 : 1,
-          pointerEvents: loaded ? "none" : "auto",
-        }}
-      >
-        <LoadingSkeleton />
-      </div>
-
-      {/* Main content */}
-      <div
-        key={slug ?? "home"}
-        className="transition-opacity duration-700"
-        style={{ opacity: loaded ? 1 : 0 }}
-      >
+      <div key={slug ?? "home"}>
         {slug ? (
           <CaseStudyPage slug={slug} onNavigate={navigate} />
         ) : (

@@ -49,7 +49,7 @@ export function Hero() {
             <span style={{ color: colors.text, fontWeight: 400 }}>
               A product and motion designer
             </span>{" "}
-            making crypto and AI feel simple for everyday people.
+            making AI feel simple for everyday people.
           </p>
         </motion.div>
       </div>

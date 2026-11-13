@@ -1,4 +1,7 @@
+import { useTheme } from "../../contexts/ThemeContext";
+
 export function Grain() {
+  const { theme } = useTheme();
   return (
     <>
       <svg className="pointer-events-none fixed inset-0 z-[60] h-full w-full opacity-[0.13] mix-blend-overlay">
@@ -15,12 +18,15 @@ export function Grain() {
             "radial-gradient(ellipse at 50% 0%, rgba(214,139,74,0.10), transparent 55%), radial-gradient(ellipse at 100% 100%, rgba(120,40,30,0.08), transparent 45%), radial-gradient(circle at 0% 60%, rgba(40,30,70,0.10), transparent 50%)",
         }}
       />
-      <div
-        className="pointer-events-none fixed inset-0 z-[58]"
-        style={{
-          boxShadow: "inset 0 0 200px 40px rgba(0,0,0,0.65)",
-        }}
-      />
+      {/* Vignette: dark mode only */}
+      {theme === "dark" && (
+        <div
+          className="pointer-events-none fixed inset-0 z-[58]"
+          style={{
+            boxShadow: "inset 0 0 200px 40px rgba(0,0,0,0.65)",
+          }}
+        />
+      )}
     </>
   );
 }

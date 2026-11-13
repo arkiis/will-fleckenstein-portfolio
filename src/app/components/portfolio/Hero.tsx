@@ -47,7 +47,7 @@ export function Hero() {
             style={{ fontFamily: BODY_FONT, color: colors.textMuted }}
           >
             <span style={{ color: colors.text, fontWeight: 400 }}>
-              A product designer who animates and codes,
+              A product and motion designer
             </span>{" "}
             making crypto and AI feel simple for everyday people.
           </p>

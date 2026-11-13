@@ -47,11 +47,9 @@ export function Hero() {
             style={{ fontFamily: BODY_FONT, color: colors.textMuted }}
           >
             <span style={{ color: colors.text, fontWeight: 400 }}>
-              A product designer who animates and codes.
+              A product designer who animates and codes,
             </span>{" "}
-            I came to UX from front-end engineering and motion design, so I design
-            interactions the way they&apos;ll actually move and ship. Lately I&apos;m
-            obsessed with making crypto and AI feel simple for everyday people.
+            making crypto and AI feel simple for everyday people.
           </p>
         </motion.div>
       </div>

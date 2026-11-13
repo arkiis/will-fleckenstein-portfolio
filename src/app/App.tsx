@@ -2,6 +2,7 @@ import { pageview } from "@vercel/analytics";
 import { useEffect, useRef, useState } from "react";
 import { Hero } from "./components/portfolio/Hero";
 import { Work } from "./components/portfolio/Work";
+import { FunProjects } from "./components/portfolio/FunProjects";
 import { About } from "./components/portfolio/About";
 import { Contact } from "./components/portfolio/Contact";
 import { Nav } from "./components/portfolio/Nav";
@@ -68,6 +69,7 @@ function AppContent() {
             <Nav />
             <Hero />
             <Work onOpen={navigate} />
+            <FunProjects />
             <About />
             <Contact />
           </>

@@ -15,6 +15,8 @@ export const analytics = {
 
   workProjectClick: (slug: string) => send("work_project_click", { slug }),
 
+  funProjectClick: (slug: string) => send("fun_project_click", { slug }),
+
   navSectionClick: (section: string) => send("nav_section_click", { section }),
 
   caseStudyView: (caseStudy: string) => send("case_study_view", { case_study: caseStudy }),
